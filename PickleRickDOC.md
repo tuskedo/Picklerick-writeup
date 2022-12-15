@@ -24,6 +24,7 @@ To find the directories and files we are using ffuf
 -u is the target URL
 
 -w is the path to the wordlist files 
+
 FUZZ we put this after the URL
 
 -e parameter suffix to your wordlist (not all extensions start with a .)
