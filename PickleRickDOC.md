@@ -22,9 +22,12 @@ Use Ctrl+u to see source code there we can find what looks like a username R1ckR
 To find the directories and files we are using ffuf
 
 -u is the target URL
+
 -w is the path to the wordlist files 
 FUZZ we put this after the URL
+
 -e parameter suffix to your wordlist (not all extensions start with a .)
+
 -t threads or processes
 
 ![ffuf](img/ffuf.png)
