@@ -1,26 +1,43 @@
 # Pickle rick write up
-Scan ports web
+
+Start by scanning ports using nmap (network mapper) to scan its open ports and services 
+Ive used 
+
+```nmap -p- -sV```
+-p- meaning ports 
+-sV port version 
+with the ip address
+
 
 ![scanport](img/scanport.png)
 
-We can only read the website 
+Lets see the website
 
 ![web](img/web.png)
 
-use Ctrl u to see source code there we can find R1ckRul3s
+Use Ctrl+u to see source code there we can find what looks like a username R1ckRul3s
 
 ![username](img/username.png) 
 
-To find the directories or files we are using ffuf
+To find the directories and files we are using ffuf
+
+-u is the target URL
+-w is the path to the wordlist files 
+FUZZ we put this after the URL
+-e parameter suffix to your wordlist (not all extensions start with a .)
+-t threads or processes
 
 ![ffuf](img/ffuf.png)
 ![directories](img/directories.png)
 
-We find robots.txt containing Wubbalubbadubdub
+We find robots.txt  
 
 ![robot.txt](img/robots.txt%20.png)
 
-Go to login.php enter user R1ckRul3s pass Wubbalubbadubdub 
+Containing Wubbalubbadubdub it looks like a password
+
+Go to login.php enter Username: R1ckRul3s 
+Password: Wubbalubbadubdub 
 
 ![login.php](img/login.php.png)
 
@@ -28,40 +45,51 @@ At the command panel start with ls
 
 ![commandpanel](img/comandpanel.png)
 
-cat Sup3rS3cretPIckl3Ingred.txt 
+Im going to try reading the file Sup3rS3cretPIckl3Ingred.txt
 
 ![failcat](img/failcat.png)
 
-not working try tac Sup3rS3cretPIckl3Ingred.txt result mr meeseek hair
+not working lets try instead a similar command 'tac'  
+
 
 ![tacIngred](img/tacIngred.png)
 
-tac clue.txt it reads Look around file system for the other ingridient 
+Result : mr meeseek hair
+
+Lets look at one of the files
 
 ![clue.txt](img/clue.txt.png)
 
-Attempt ls /home/ shows rick
+Attempt ls /home/ where the users are located
 
 ![home](img/home.png) 
 
-ls /home/rick result second ingridients
+Lets see inside /home/rick
 
 ![rickhome](img/rickhome.png)
 
-then tac home/rick/''second ingredients'' 1 jerry tear
+tac home/rick/''second ingredients'' 
+Remember to write in quotation marks if not it will read **second only** and as a directory.
 
 ![scondingred](img/secondingred.png)
 
-Permissions sudo -l  (ALL) NOPASSWD: ALL no password needed
+Result : 1 jerry tear
+
+
+Permissions sudo -l  
 
 ![sudo-l](img/sudo-l.png)
+
+(ALL) NOPASSWD: ALL no password needed
 
 Go to sudo ls /root/
 
 ![root](img/root.png)
 
-sudo tac /root/3rd.txt fleeb juice
+sudo tac /root/3rd.txt 
 
 ![3rdingred](img/3rdingred.png)
 
-finished
+Result : fleeb juice
+
+Finished.
